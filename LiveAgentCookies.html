@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <apex:stylesheet value="https://mercer--liveagnt--c.visualforce.com/resource/1593443273000/Mercercss1"/>
+
+    <apex:stylesheet value="https://mercer--liveagnt--c.visualforce.com/resource/1593443299000/Mercercss2"/>
+
+    <apex:includeLightning />
+  <h1>Let’s start chatting...</h1>
+  <br />
+  Click the button to start a chat.
+  <br />
+<style type='text/css'>
+    
+    .embeddedServiceHelpButton .helpButton .uiButton {
+        background-color: #009DE0;
+        font-family: "MuteRegular",source-han-sans-japanese,source-han-sans-simplified-c,source-han-sans-traditional,source-han-sans-korean,Arial,sans-serif !important;
+    }
+    .embeddedServiceHelpButton .helpButton .uiButton:focus {
+        outline: 1px solid #009DE0;
+    }
+    .chatSessionStartTime
+    {
+        max-height: 0px !important;
+    }
+    .avatar
+    {
+        width: 30px !important;
+        height: 18px !important;
+    }
+    .sidebarHeader
+    {
+        border-bottom: 1px solid white !important;
+        background-color: #009DE0 !important;
+    }
+    .sidebarHeader h2
+    {
+        text-align: center !important;
+        font-size: 18px !important;
+        font-family: "MuteRegular",source-han-sans-japanese,source-han-sans-simplified-c,source-han-sans-traditional,source-han-sans-korean,Arial,sans-serif !important;
+
+    }
+    .shortHeader
+    {
+        border-bottom: 1px solid #c5b3b3 !important;
+    }
+    .fade.fade-4x .message {
+    width: 90% !important;
+    }
+    .bBody
+    {
+    background: none !important;
+    cursor: pointer !important;
+    }
+    .helpButton
+    {
+     	transform: rotate(-90deg) !important;
+    	text-align: right !important;
+    	position: fixed !important;
+    	left: 97% !important;
+		bottom:40% !important;
+	}
+</style>
+
+<script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
+<div class="cookie-consent js-cookie" style="display: block;">
+    <input type="hidden" value="1"/>
+	<div class="cookie-content grid-x grid-padding-x">
+		<div class="small-12 medium-9 cell">
+			<p>Usamos cookies para proporcionarle una mejor experiencia. Al continuar en nuestro sitio, usted acepta que instalemos cookies en su dispositivo. Por favor consulte nuestra&nbsp;<a href="http://www.mercer.com/privacy.html">Política de Privacidad</a>&nbsp;para más detalles.</p>
+
+		</div>
+		<div class="small-12 medium-3 cell align-right">
+			<a id="cookieConsentButton" class="btn btn-primary js-cookie-anchor" title="I Accept" href="#" onclick="s_objectID='cookieConsentButton';">OK</a>
+		</div>
+	</div>
+</div>
+<script type='text/javascript'>
+    var hyperlinki = "https://www.mercer.us/privacy.html";
+    var initESW = function(gslbBaseURL) {
+        embedded_svc.settings.displayHelpButton = true; //Or false
+        embedded_svc.settings.language = 'en-US'; //For example, enter 'en' or 'en-US'
+        embedded_svc.settings.defaultMinimizedText = 'Chatear con un experto';
+        //embedded_svc.settings.defaultMinimizedText = '...'; //(Defaults to Chat with an Expert)
+        //embedded_svc.settings.disabledMinimizedText = '...'; //(Defaults to Agent Offline)
+
+        //embedded_svc.settings.loadingText = ''; //(Defaults to Loading)
+        //embedded_svc.settings.storageDomain = 'yourdomain.com'; //(Sets the domain for your deployment so that visitors can navigate subdomains during a chat session)
+
+        // Settings for Chat
+        //embedded_svc.settings.directToButtonRouting = function(prechatFormData) {
+            // Dynamically changes the button ID based on what the visitor enters in the pre-chat form.
+            // Returns a valid button ID.
+        //};
+        //embedded_svc.settings.prepopulatedPrechatFields = {}; //Sets the auto-population of pre-chat form fields
+        //embedded_svc.settings.fallbackRouting = []; //An array of button IDs, user IDs, or userId_buttonId
+        //embedded_svc.settings.offlineSupportMinimizedText = '...'; //(Defaults to Contact Us)
+
+        embedded_svc.settings.chatbotAvatarImgURL = "https://mercer--liveagnt--c.visualforce.com/resource/1590604140000/MercerLogo";
+        embedded_svc.settings.smallCompanyLogoImgURL = "https://mercer--liveagnt--c.visualforce.com/resource/1590604140000/MercerLogo";
+        embedded_svc.settings.enabledFeatures = ['LiveAgent'];
+        embedded_svc.settings.entryFeature = 'LiveAgent';
+        embedded_svc.settings.extraPrechatFormDetails = [
+          { 
+            "label":"First Name", "transcriptFields":[ "FirstName__c" ],
+          },{
+            "label":"Last Name", "transcriptFields": ["LastName__c"]
+          },{
+           "label":"Company", "transcriptFields": ["Company__c"]
+          },{
+           "label":"Work Email", "transcriptFields": ["Email__c"]
+          },{
+           "label":"Title", "transcriptFields": ["Title__c"]
+          },{
+           "label":"Country", "transcriptFields": ["Country__c"]
+          },{
+           "label":"Email Opt In", "transcriptFields": ["Email_OptIn__c"]
+        }];
+       
+
+        embedded_svc.init(
+            'https://mercer--liveagnt.my.salesforce.com',
+            'https://liveagnt-mercer-community.cs97.force.com/premier',
+            gslbBaseURL,
+            '00D0U0000009V02',
+            'Mercer_USA_Deployment',
+            {
+                baseLiveAgentContentURL: 'https://c.la2-c1cs-ord.salesforceliveagent.com/content',
+                deploymentId: '5720U0000004DA3',
+                buttonId: '5730U0000004DtB',
+                baseLiveAgentURL: 'https://d.la2-c1cs-ord.salesforceliveagent.com/chat',
+                eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I0U00000000BdUAI_171d3478342',
+                isOfflineSupportEnabled: false
+            }
+        );
+    };
+
+    if (!window.embedded_svc) {
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://mercer--liveagnt.my.salesforce.com/embeddedservice/5.0/esw.min.js');
+        s.onload = function() {
+            initESW(null);
+        };
+        document.body.appendChild(s);
+    } else {
+        initESW('https://service.force.com');
+    }
+</script>
+</html>
